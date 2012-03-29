@@ -4,5 +4,6 @@
 *.toc
 *.bbl
 *.blg
+*.synctex.gz
 .project
 tmp

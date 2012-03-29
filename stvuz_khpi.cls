@@ -160,6 +160,16 @@ urlcolor=black, pdftitle=Bolshutkin MT}
 \addcontentsline{toc}{section}{\tocsecindent{Додаток~\thesection~#1}}
 }
 
+\newcommand\appendixSubsection[1]{
+\stepcounter{subsection}
+\subsection*{\thesubsection~#1}
+}
+
+\newcommand\appendixSubsubsection[1]{
+\stepcounter{subsubsection}
+\subsubsection*{\thesubsubsection~#1}
+}
+
 % поддержка продолжения нумерации (например, для библиографии)
 \newcounter{saveenum}
 

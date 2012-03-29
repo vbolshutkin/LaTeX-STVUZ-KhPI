@@ -77,6 +77,7 @@
 
 \begin{longEnumerate}
 \item Стилі таблиць коректно працюють лише для широких таблиць (на всю область сторінки). Інакше, заголовок таблиці всеодно відображається ліворуч, а не над першою колонкою таблиці.
+\item В Footnote не працює одинарний інтервал (залишається півтора) 
 \end{longEnumerate}
 
 \section{Нотатки по практичному застосуванню шаблона}
@@ -92,6 +93,7 @@
 
 Маркірований список
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{itemize}
 \item one;
@@ -99,6 +101,7 @@
 \item three.
 \end{itemize}
 \end{lstlisting}
+\end{framed}
 
 \begin{itemize}
 \item one;
@@ -108,6 +111,7 @@
 
 Нумерований список
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{enumerate}
 \item one;
@@ -115,6 +119,7 @@
 \item three.
 \end{enumerate}
 \end{lstlisting}
+\end{framed}
 
 \begin{enumerate}
 \item one;
@@ -124,13 +129,18 @@
 
 Нумерований розгорнутий список
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{longEnumerate}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod semper arcu, id tempor ligula pellentesque sed. 
-\item Integer quis metus sapien, at auctor ipsum. Pellentesque scelerisque lacinia nisi vestibulum eleifend. 
-\item Aenean vel nunc tortor, ac facilisis mauris. Phasellus sed quam risus, vel dictum nibh.
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+ Nam euismod semper arcu, id tempor ligula pellentesque sed.
+\item Integer quis metus sapien, at auctor ipsum. Pellentesque
+ scelerisque lacinia nisi vestibulum eleifend.
+\item Aenean vel nunc tortor, ac facilisis mauris. Phasellus
+ sed quam risus, vel dictum nibh.
 \end{longEnumerate}
 \end{lstlisting}
+\end{framed}
 
 \begin{longEnumerate}
 \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod semper arcu, id tempor ligula pellentesque sed. 
@@ -142,6 +152,7 @@
 
 Маркірований список вкладений до нумерованого
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{enumerate}
 \item one;
@@ -154,6 +165,7 @@
 \item three.
 \end{enumerate}
 \end{lstlisting}
+\end{framed}
 
 \begin{enumerate}
 \item one;
@@ -168,19 +180,23 @@
 
 Маркірований список вкладений до нумерованого розгорнутого
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{longEnumerate}
-\item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod semper arcu, id tempor ligula pellentesque sed. 
-\item Integer quis metus sapien, at auctor ipsum. Pellentesque scelerisque
-lacinia nisi vestibulum eleifend:
+\item Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ Nam euismod semper arcu, id tempor ligula pellentesque sed.
+\item Integer quis metus sapien, at auctor ipsum. Pellentesque
+ scelerisque lacinia nisi vestibulum eleifend:
 \begin{itemize}
   \item two one;
   \item two two;
   \item two three.
 \end{itemize}
-\item Aenean vel nunc tortor, ac facilisis mauris. Phasellus sed quam risus, vel dictum nibh.
+\item Aenean vel nunc tortor, ac facilisis mauris. Phasellus
+ sed quam risus, vel dictum nibh.
 \end{longEnumerate}
 \end{lstlisting}
+\end{framed}
 
 \begin{longEnumerate}
 \item Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod semper arcu, id tempor ligula pellentesque sed. 
@@ -196,6 +212,7 @@ lacinia nisi vestibulum eleifend:
 
 Нумерований літерами
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{enumerate}
 \item one;
@@ -203,11 +220,19 @@ lacinia nisi vestibulum eleifend:
 \begin{enumerate}
   \item two one;
   \item two two;
-  \item two three.
+  \item two three;
+  \item two four;
+  \item two five;
+  \item two six;
+  \item two seven;
+  \item two eight;
+  \item two nine;
+  \item two ten.
 \end{enumerate}
 \item three.
 \end{enumerate}
 \end{lstlisting}
+\end{framed}
 
 \begin{enumerate}
 \item one;
@@ -215,7 +240,14 @@ lacinia nisi vestibulum eleifend:
 \begin{enumerate}
   \item two one;
   \item two two;
-  \item two three.
+  \item two three;
+  \item two four;
+  \item two five;
+  \item two six;
+  \item two seven;
+  \item two eight;
+  \item two nine;
+  \item two ten.
 \end{enumerate}
 \item three.
 \end{enumerate}
@@ -226,11 +258,13 @@ lacinia nisi vestibulum eleifend:
 
 Для вставки формули з номером
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{equation}
 \Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
 \end{equation}
 \end{lstlisting}
+\end{framed}
 
 \begin{equation}
 \Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
@@ -238,11 +272,13 @@ lacinia nisi vestibulum eleifend:
 
 Для вставки формули без номеру
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{equation*}
 g = \frac{1}{2} \sqrt{2\pi}
 \end{equation*}
 \end{lstlisting}
+\end{framed}
 
 \begin{equation*}
 g = \frac{1}{2} \sqrt{2\pi}
@@ -251,19 +287,24 @@ g = \frac{1}{2} \sqrt{2\pi}
 Змінні що використані у формулі та не були описані до того у тексті повинні бути
 описані відразу після формули. 
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{equation}
 E = -J \sum_{i=1}^N s_i s_{i+1} ,
 \end{equation}
+# leave an empty line here
+
 \begin{formulaDescription}
 \item[$E$] something;
 \item[$J$] something else.
 \end{formulaDescription}
 \end{lstlisting}
+\end{framed}
 
 \begin{equation}
 E = -J \sum_{i=1}^N s_i s_{i+1} ,
 \end{equation}
+
 \begin{formulaDescription}
 \item[$E$] something;
 \item[$J$] something else.
@@ -271,6 +312,7 @@ E = -J \sum_{i=1}^N s_i s_{i+1} ,
 
 \subsubsection{Оформлення ілюстрацій}
 
+\begin{framed}\small
 \begin{lstlisting}
 \begin{stdfigure}
 \includegraphics[width=2.7in]{images/idef_fb.png}
@@ -278,6 +320,7 @@ E = -J \sum_{i=1}^N s_i s_{i+1} ,
 \label{fig:idef_fb}
 \end{stdfigure}
 \end{lstlisting}
+\end{framed}
 
 \begin{stdfigure}
 \includegraphics[width=2.7in]{images/idef_fb.png}
@@ -288,14 +331,51 @@ E = -J \sum_{i=1}^N s_i s_{i+1} ,
 Оформлення рисунків, що переносяться між сторінками досі не підтримується даним
 шаблоном (хоча частково відповідний код вже написано).
 
+\subsubsection{Оформлення таблиць}
+
+Короткі таблиці
+
+\begin{framed}\small
+\begin{lstlisting}
+\begin{shorttable}{2}{|c|c|}
+{\label{tbl:shorttbl}Short table name}
+{
+Lorem &
+Ipsum
+}
+1 & 2 \\ \hline
+3 & 4 \\ \hline
+\end{shorttable}
+\end{lstlisting}
+\end{framed}
+
+Довгі таблиці, що переносяться на декілька сторінок
+
+\begin{framed}\small
+\begin{lstlisting}
+\begin{longtable}{2}{|c|c|}
+{\label{tbl:ndrparam}Long table name}
+{
+Lorem &
+Ipsum
+}
+1 & 2 \\ \hline
+% insert table rows here 
+99 & 100 \\ \hline
+\end{shorttable}
+\end{lstlisting}
+\end{framed}
+
 \subsubsection{Оформлення додатків}
 
+\begin{framed}
 \begin{lstlisting}
 \startAppendix
 \appendixSection{Addon 1}\label{add:addon1} 
-\subsection*{Subsection header}
-\subsubsection*{Subsubsection header}
+\appendixSubsection{Subsection header}
+\appendixSubsubsection{Subsubsection header}
 \end{lstlisting}
+\end{framed}
 
 Приклад наведено у додатку \ref{add:addon1}.
 
@@ -313,7 +393,10 @@ E = -J \sum_{i=1}^N s_i s_{i+1} ,
 
 \subsection{Можливі проблеми та підходи до їх розв'язання}
 
-Проблеми використання розробленого шаблону мають різне походження, у переліку представлені найбільш поширені.
+Проблеми використання розробленого шаблону мають різне походження.
+
+Якщо щось не так - спробуйте погратися доданням чи видаленням тексту, переносів
+сторк.
 
 \begin{longEnumerate}
 \item \ldots 
