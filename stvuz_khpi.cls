@@ -9,7 +9,8 @@
 \usepackage{cmap}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc} % кодировка может быть любой, если она UTF-8
-\usepackage[ukrainian,russian,english]{babel} % украинские, русские и английские переносы
+\usepackage[ukrainian,russian,english]{babel} % украинские, русские и английские
+% переносы
 
 % \usepackage{pscyr} % TODO check: кажется, поддержка Times New Roman 
 \renewcommand{\rmdefault}{ftm}
@@ -66,12 +67,12 @@
 
 \bibliographystyle{stvuz_utf8gost780u}  % стилевой файл для оформления
 % библиографии по ГОСТ 7.1-84 и ГОСТ 7.80-00 . FIXME В СТВУЗ написано
-% использовать ДСТУ ГОСТ 7.1. 
+% использовать ДСТУ ГОСТ 7.1. 
 
 
 \def\BibEmph#1{\textrm{#1}} % убрать курсив
 
-\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, filecolor=black,
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, filecolor=black, 
 urlcolor=black, pdftitle=Bolshutkin MT}
 
 \usepackage{caption}
@@ -183,7 +184,8 @@ urlcolor=black, pdftitle=Bolshutkin MT}
 
 \newlength{\beforesubsectionskip}
 \setlength{\beforesubsectionskip}{21pt}
-\newcommand\beforesubsection{\vspace*{\beforesubsectionskip}\setlength{\beforesubsectionskip}{0mm}}
+\newcommand\beforesubsection{\vspace*{\beforesubsectionskip}
+    \setlength{\beforesubsectionskip}{0mm}}
 \newcommand\aftersection{\setlength{\beforesubsectionskip}{21pt}}
 
 % Стили заголовков секций
@@ -252,7 +254,8 @@ mu$}\hfill
 \parindent \z@ \rightskip \@pnumwidth
 \parfillskip -\@pnumwidth
 \leavevmode
-\advance\leftskip 1em \null\nobreak\hskip -\leftskip % 1em вместо \@tempdima чтобы выровнять
+\advance\leftskip 1em \null\nobreak\hskip -\leftskip 
+% 1em вместо \@tempdima чтобы выровнять
 {\hspace{0.5cm}{#1}\nobreak }%
 \leaders\hbox{%
 $\m@th
@@ -274,8 +277,10 @@ mu$}\hfill%
 \parindent \z@ \rightskip \@pnumwidth %  Отступ справа от цифр
 \parfillskip -\@pnumwidth %  Отступ точек слева от цифр
 \leavevmode
-\advance\leftskip 2em \null\nobreak\hskip -\leftskip % 2em вместо \@tempdima чтобы выровнять
-{\hspace{1cm}{#1}\nobreak }% Одновременно определяет и сдвиг метки и сдвиг текста обратно!!!!
+\advance\leftskip 2em \null\nobreak\hskip -\leftskip 
+% 2em вместо \@tempdima чтобы выровнять
+{\hspace{1cm}{#1}\nobreak }
+% Одновременно определяет и сдвиг метки и сдвиг текста обратно!!!!
 \leaders\hbox{%
 $\m@th
 \mkern \@dotsep mu\hbox{.}\mkern \@dotsep%
@@ -325,8 +330,9 @@ mu$}\hfill%
 
 % Глобальное хранение отступа первой строки для вложенных списков
 \newlength{\globalitemindent}
-\newcommand{\addindent}{\addtolength{\globalitemindent}{1.5cm}\setlength{\itemindent}{\globalitemindent}}
-\newcommand{\delindent}{\addtolength{\globalitemindent}{-1.5cm}}
+\newcommand{\addindent}{\addtolength{\globalitemindent}{1.25cm}
+    \setlength{\itemindent}{\globalitemindent}}
+\newcommand{\delindent}{\addtolength{\globalitemindent}{-1.25cm}}
 
 % Стили отступов списков
 \let\old@itemize\itemize
@@ -346,15 +352,18 @@ mu$}\hfill%
 
 % Стили отступов нумерованных списков, перечислений
 \setenumerate{fullwidth, noitemsep, topsep=0mm, partopsep=0mm}
-\setenumerate[1]{itemindent=\parindent, listparindent=\parindent} % FIXME bug: listparindent dones't work
+\setenumerate[1]{itemindent=\parindent, listparindent=\parindent}
+% FIXME bug: listparindent dones't work
 \setenumerate[2]{itemindent=2\parindent} % FIXME отступы не по стандарту
 
 % Стили отступов нумерованных списков, перечислений
-\setlist{fullwidth, noitemsep, topsep=0mm, partopsep=0mm, itemindent=\parindent, listparindent=\parindent} 
+\setlist{fullwidth, noitemsep, topsep=0mm, partopsep=0mm, itemindent=\parindent,
+    listparindent=\parindent}
 
 % Стили отступов списков % FIXME отступы не по стандарту
 \setitemize{fullwidth, noitemsep, topsep=0mm, partopsep=0mm}
-\setitemize[1]{itemindent=\parindent, listparindent=\parindent} % FIXME bug: listparindent doesn't work
+\setitemize[1]{itemindent=\parindent, listparindent=\parindent} 
+% FIXME bug: listparindent doesn't work
 \setitemize[2]{itemindent=2\parindent}
 
 %% Стили описаний переменных в формулах
@@ -371,7 +380,8 @@ mu$}\hfill%
 
 \newcommand{\whereItem}[1][1]{%
 {\indent\descrLabel}#1~--%
-\renewcommand{\item}[1][1]{\setlength{\parindent}{\oldParindent+\descrLabelLen} \par \indent ##1~--}%
+\renewcommand{\item}[1][1]{\setlength{\parindent}{\oldParindent+\descrLabelLen}
+\par \indent ##1~--}%
 }
 
 % WTF! Очень спорный момент! Расхождения между СТВУЗ и правилами кафедры
@@ -398,6 +408,16 @@ mu$}\hfill%
 {
   \end{description}
   \renewcommand{\item}[1][1]{\old@item[##1]} 
+}
+
+\newenvironment{longEnumerate}
+{ 
+  \liststyleNumberingArabicSpace
+  \begin{enumerate}
+} 
+{
+  \end{enumerate}
+  \liststyleNumberingArabicLitera
 }
 
 % команда, необходимая для гибкости ручного добавления записей в Содержание
@@ -427,32 +447,6 @@ mu$}\hfill%
 \newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
             {\hbox{\mathsurround=0pt #1}}{}}
 
-% % Пропуск строки до и после формул FIXME не работает!!!!!!!!!!!!!!! 
-% % FIXME Грязные хаки: \vspace*{0pt} для компенсации команды
-% % \ignorespacesafterend
-% \if 0
-% \let\old@equation\equation
-% \let\endold@equation\endequation
-% \renewenvironment{equation}{
-% \old@equation}
-% {
-% \endold@equation \vspace*{0pt}}
-% 
-% 
-% % Переопределить команду со * не вышло. Поэтому взяли её исходный код и
-% % закомментировали команду \ignorespacesafterend 
-% 
-% \renewenvironment{equation*}{%
-%   \mathdisplay@push
-%   \st@rredtrue \global\@eqnswfalse
-%   \mathdisplay{equation*}%
-% }{%
-%   \endmathdisplay{equation*}%
-%   \mathdisplay@pop%
-%  \par ~%
-%   \ignorespacesafterend% 
-% }
-% \fi
 
 % Пропуск строки перед рисунками
 \newenvironment{stdfigure}{\@float{figure}[h!] \skipline \centering }
@@ -609,7 +603,8 @@ mu$}\hfill%
 \newcommand{\cldq}{”\setcounter{ldqopen}{1}}
 \newcommand{\edq}{\ifthenelse{\equal{\arabic{edqopen}}{1}}{\oedq}{\cedq}}
 \newcommand{\ldq}{\ifthenelse{\equal{\arabic{ldqopen}}{1}}{\oldq}{\cldq}}
-\newcommand{\quot}[1][0]{\ifthenelse{{\equal{\arabic{ldqopen}}{0}}\or{\equal{#1}{1}\and\equal{\arabic{innerquote}}{1}}}{\ldq}{\edq}}
+\newcommand{\quot}[1][0]{\ifthenelse{{\equal{\arabic{ldqopen}}{0}}\or
+    {\equal{#1}{1}\and\equal{\arabic{innerquote}}{1}}}{\ldq}{\edq}}
 
 %page number for toc
 \newcounter{tocpage}

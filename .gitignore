@@ -4,3 +4,5 @@
 *.toc
 *.bbl
 *.blg
+.project
+tmp
