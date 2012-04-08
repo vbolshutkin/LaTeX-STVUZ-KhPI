@@ -31,8 +31,8 @@
 \item abbrDescription;
 \item equation;
 \item equation*;
-\item shorttable;
-\item longtable.
+\item stdtableshort;
+\item stdtablelong.
 \end{enumerate}
 
 Перелік команд включає:
@@ -256,18 +256,20 @@ lacinia nisi vestibulum eleifend:
 
 \subsubsection{Вставка формул}
 
-Для вставки формули з номером
+Для вставки формули з номером:
 
 \begin{framed}\small
 \begin{lstlisting}
 \begin{equation}
-\Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
+\text{ Це } \Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
 \end{equation}
 \end{lstlisting}
 \end{framed}
 
+Результат:
+
 \begin{equation}
-\Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
+\text{ Це } \Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
 \end{equation}
 
 Для вставки формули без номеру
@@ -279,6 +281,8 @@ g = \frac{1}{2} \sqrt{2\pi}
 \end{equation*}
 \end{lstlisting}
 \end{framed}
+
+Результат:
 
 \begin{equation*}
 g = \frac{1}{2} \sqrt{2\pi}
@@ -301,6 +305,8 @@ E = -J \sum_{i=1}^N s_i s_{i+1} ,
 \end{lstlisting}
 \end{framed}
 
+Результат:
+
 \begin{equation}
 E = -J \sum_{i=1}^N s_i s_{i+1} ,
 \end{equation}
@@ -322,6 +328,8 @@ E = -J \sum_{i=1}^N s_i s_{i+1} ,
 \end{lstlisting}
 \end{framed}
 
+Результат:
+
 \begin{stdfigure}
 \includegraphics[width=2.7in]{images/idef_fb.png}
 \caption{Figure caption}
@@ -337,7 +345,7 @@ E = -J \sum_{i=1}^N s_i s_{i+1} ,
 
 \begin{framed}\small
 \begin{lstlisting}
-\begin{shorttable}{2}{|c|c|}
+\begin{stdtableshort}{2}{|c|c|}
 {\label{tbl:shorttbl}Short table name}
 {
 Lorem &
@@ -345,7 +353,7 @@ Ipsum
 }
 1 & 2 \\ \hline
 3 & 4 \\ \hline
-\end{shorttable}
+\end{stdtableshort}
 \end{lstlisting}
 \end{framed}
 
@@ -353,7 +361,7 @@ Ipsum
 
 \begin{framed}\small
 \begin{lstlisting}
-\begin{longtable}{2}{|c|c|}
+\begin{stdtablelong}{2}{|c|c|}
 {\label{tbl:ndrparam}Long table name}
 {
 Lorem &
@@ -362,7 +370,7 @@ Ipsum
 1 & 2 \\ \hline
 % insert table rows here 
 99 & 100 \\ \hline
-\end{shorttable}
+\end{stdtableshort}
 \end{lstlisting}
 \end{framed}
 
@@ -543,12 +551,16 @@ IDEF1Х-методологии}
 На рисунку 4.1 наведено алгоритм обчислення характеристик обладнання.
 
 \subsection{Аналіз отриманих результатів моделювання}
-\begin{longtable}{5}{|m{2cm}|m{3cm}|m{3cm}|m{3cm}|m{2cm}|}
+
+Наводимо результати проведення чисельних експериментів з математичною моделлю (таблиця \ref{tbl:experiment}).
+
+
+\begin{stdtablelong}{5}{|C{2cm}|C{4cm}|C{4cm}|C{4cm}|C{2cm}|}
 {\label{tbl:experiment}Результати
 проведення чисельних експериментів з математичною моделлю}
 {  
  № варіанта &
-\multicolumn{3}{l|}{Значення параметрів технологічного встаткування} &
+\multicolumn{3}{C{12cm}|}{Значення параметрів технологічного встаткування} &
 Час зборки, с \\ \cline{2-4}
 & A & B & C &
 }
@@ -579,19 +591,21 @@ IDEF1Х-методологии}
 25 & & & & \\ \hline
 26 & & & & \\ \hline
 27 & & & & \\ \hline
-\end{longtable}
+\end{stdtablelong}
 
-Результати моделювання наведені в таблиці \ref{tbl:experiment}.
+Результати моделювання наведені в таблиці \ref{tbl:ndrparam} \cite{KuzmenkoSafety}.
 
-\begin{shorttable}{2}{|c|c|}
-{\label{tbl:ndrparam}Характеристика роботи}
-{
-Час спостережень &
-Значення параметру
-}
+
+\begin{stdtableshort}
+  {2}
+  {|c|X|}
+  {\label{tbl:ndrparam}Характеристика роботи}
+  {Час спостережень & Значення параметру}
 00:01 & 1 \\ \hline
 00:02 & 2 \\ \hline
 00:03 & 1 \\ \hline
 00:04 & 3 \\ \hline
-\end{shorttable}
+\end{stdtableshort}
 
+
+Отже, \ldots

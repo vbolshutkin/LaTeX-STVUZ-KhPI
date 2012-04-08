@@ -2,28 +2,87 @@
 \ProvidesClass{stvuz_khpi}[2010/03/01]
 \LoadClass[a4paper,14pt,hyphens]{extarticle}[1996/10/08]
 
+\usepackage{xltxtra}
+\usepackage{polyglossia}  %% подключает пакет многоязыкой вёрстки
+\setmainfont{Times New Roman}  %% задаёт основной шрифт документа
+\setsansfont{DejaVu Sans}  %% задаёт шрифт без засечек
+\setmonofont{DejaVu Sans Mono}  %% задаёт моноширинный шрифт
+\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}  %% устанавливает поведение шрифтов по умолчанию
+\setdefaultlanguage{ukrainian}
+%\setdefaultlanguage[spelling=modern]{russian}  %% устанавливает язык по умолчанию
+\setotherlanguage{english}
 
+
+\newfontfamily\cyrillicfont{Times New Roman}
+
+
+\makeatletter
+
+\uchyph=1
+
+\mathchardef\mhyphen="2D
+
+\def\captionsukrainian{%
+   \def\refname{Список джерел інформації}%
+   \def\abstractname{Анотація}%
+   \def\bibname{Бібліоґрафія}%
+   \def\prefacename{Вступ}%
+   \def\chaptername{Розділ}%
+   \def\appendixname{Додаток}%
+   \def\contentsname{Зміст}%
+   \def\listfigurename{Перелік ілюстрацій}%
+   \def\listtablename{Перелік таблиць}%
+   \def\indexname{Покажчик}%
+   \def\authorname{Іменний покажчик}% babel has "Їменний покажчик"
+   \def\figurename{Рисунок}%
+   \def\tablename{Таблиця}%
+   %\def\thepart{}%
+   \def\partname{Частина}%
+   \def\pagename{с.}%
+   \def\seename{див.}%
+   \def\alsoname{див.\ також}%
+   \def\enclname{вкладка}%
+   \def\ccname{копія}%
+   \def\headtoname{До}%
+   \def\proofname{Доведення}%
+   \def\glossaryname{Словник термінів}%
+   }
+
+
+\def\appendixAsbuk#1{\ifcase#1\or
+   А\or Б\or В\or г\or д\or Е\or Є\or Ж\or
+   З\or И\or І\or Ї\or Й\or К\or Л\or М\or Н\or О\or
+   П\or Р\or С\or Т\or У\or Ф\or Х\or
+   Ц\or Ч\or Ш\or Щ\or Ю\or Я\else\xpg@ill@value{#1}{ukrainian@Asbuk}\fi}
+\def\appendixasbuk#1{\ifcase#1\or
+   а\or б\or в\or г\or д\or е\or є\or ж\or
+   з\or и\or і\or ї\or й\or к\or л\or м\or н\or о\or
+   п\or р\or с\or т\or у\or ф\or х\or
+   ц\or ч\or ш\or щ\or ю\or я\else\xpg@ill@value{#1}{ukrainian@asbuk}\fi}
+
+\def\Asbuk#1{\expandafter\ukrainian@Alph\csname c@#1\endcsname}
+\def\asbuk#1{\expandafter\ukrainian@alph\csname c@#1\endcsname}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Пакеты
 \usepackage{footmisc}
 \usepackage[unicode,breaklinks]{hyperref}
-\usepackage{mathtext} % кириллические буквы в формулах
-\usepackage{cmap}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc} % кодировка может быть любой, если она UTF-8
-\usepackage[ukrainian,russian,english]{babel} % украинские, русские и английские
-% переносы
-
-% \usepackage{pscyr} % TODO check: кажется, поддержка Times New Roman 
-\renewcommand{\rmdefault}{ftm}
+%\usepackage{mathtext} % кириллические буквы в формулах
+\usepackage{fontspec}
+\usepackage{xunicode}
+%\usepackage{cmap}
+%\usepackage{xecyr}
+\input{cyrunicode}
 
 \let\footnotesize\relax
-\renewcommand*{\footnotelayout}{\linespread{1}} % FIXME одинарный интервал не
-% ставится
+\renewcommand*{\footnotelayout}{\linespread{1}} % FIXME одинарный интервал не ставится
 
 \usepackage{forloop}
 \usepackage{expl3}
 
-\usepackage[noenc]{tipa}
-\usepackage{tipx}
+%\usepackage[noenc]{tipa}
+%\usepackage{tipx}
 \usepackage{boldline} % поддержка жирных линий в таблицах
 
 \usepackage[geometry,weather,misc,clock]{ifsym}
@@ -34,7 +93,7 @@
 \usepackage{eurosym}
 \usepackage{amsmath}
 \usepackage{wasysym}
-\usepackage{amssymb}
+%\usepackage{amssymb}
 \usepackage{amsfonts}
 %\usepackage{textcomp} % Conflicts
 \usepackage{tabularx}
@@ -72,9 +131,6 @@
 
 \def\BibEmph#1{\textrm{#1}} % убрать курсив
 
-\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, filecolor=black, 
-urlcolor=black, pdftitle=Bolshutkin MT}
-
 \usepackage{caption}
 
 %\usepackage{printlen} % отладочные команды
@@ -110,12 +166,22 @@ urlcolor=black, pdftitle=Bolshutkin MT}
 % СТВУЗ ХПІ 3.01-2010 пункт 4.1 
 \linespread{1.3} % Полуторный интервал
 
+% Команда для пропуска строки
+\newcommand{\skipline}{\vspace{18pt}} 
+\newcommand{\skipbeforeformula}{\vspace{6pt}} 
+\newcommand{\skipafterformula}{\vspace{1pt}} 
+% Отступы до и после floats
+\renewcommand\FBaskip{18pt}
+
+
+
 % Разрешить увеличивать интервалы между словами для избежания переносов
 \sloppy
 \hbadness=10000 
 
-% Начало описания комад поддержки стиля
-\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Заголовки
 
 % СТВУЗ ХПІ 3.01-2010 пункт 5.2.4
 % ключевын слова прописными буквами
@@ -170,6 +236,10 @@ urlcolor=black, pdftitle=Bolshutkin MT}
 \subsubsection*{\thesubsubsection~#1}
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Списки
+
 % поддержка продолжения нумерации (например, для библиографии)
 \newcounter{saveenum}
 
@@ -185,12 +255,17 @@ urlcolor=black, pdftitle=Bolshutkin MT}
 
 \newcommand\liststyleNumberingArabicLitera{%
 \renewcommand\theenumi{\arabic{enumi}}
-\renewcommand\theenumii{\asbuk{enumii}}
+\renewcommand\theenumii{\alph{enumii}}
 \renewcommand\labelenumi{\theenumi)}
 \renewcommand\labelenumii{\theenumii)}
 }
 
 \newcommand\liststyleNumberingBibliography{\liststyleNumberingArabicSpace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Заголовки
+% опять
 
 \newlength{\beforesubsectionskip}
 \setlength{\beforesubsectionskip}{21pt}
@@ -301,23 +376,14 @@ mu$}\hfill%
 \endgroup
 \fi}
 
-% СТВУЗ ХПІ 3.01-2010 пункт 6.3.4.3
-% отступы до и после подписей рисунков
-\setlength\abovecaptionskip{2\p@}
-\setlength\belowcaptionskip{1\p@}
 
-% Подписи рисунков
-\def\capfigure{figure}
-\def\captable{table}
-\long\def\@makecaption#1#2{%
-  \vskip\abovecaptionskip
-  \ifx\@captype\capfigure
-      \centering #1~--~#2 \par
-  \else
-      #1~--~#2 \par
-  \fi
-  \vskip\belowcaptionskip}
-  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Рисунки
+
+%% Пропуск строки перед рисунками
+\newenvironment{stdfigure}{\@float{figure}[h!] \skipline \centering }
+{\end@float}
+
 % СТВУЗ ХПІ 3.01-2010 пункт 6.3.4.6
 % команда для продолжения рисунков  
 \newcommand{\captioncont}{
@@ -333,6 +399,10 @@ mu$}\hfill%
 \vskip\belowcaptionskip
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Списки
+% опять
 % нулевой отступ для списков
 \setlength{\leftmargin}{0cm}
 
@@ -376,50 +446,45 @@ mu$}\hfill%
 % FIXME bug: listparindent doesn't work
 \setitemize[2]{itemindent=2\parindent}
 
-%% Стили описаний переменных в формулах
-\def\descrLabel{де~}
-\newlength{\descrLabelLen}
-\settowidth{\descrLabelLen}{\descrLabel}
-
 % Стандартная команда item
 \let\old@item\item
 
-% FIXME parindent
-\newlength{\oldParindent}
-\setlength{\oldParindent}{\parindent}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Формулы
+% Стили описаний переменных в формулах
+\def\descrLabel{де~}
+\newlength{\descrLabelLen}
+\settowidth{\descrLabelLen}{~\descrLabel}
 
 \newcommand{\whereItem}[1][1]{%
-{\indent\descrLabel}#1~--%
-\renewcommand{\item}[1][1]{\setlength{\parindent}{\oldParindent+\descrLabelLen}
-\par \indent ##1~--}%
+{\descrLabel}#1~--%
+\renewcommand{\item}[1][1]{\setlength{\parindent}{\oldParindent+\descrLabelLen} \par \indent ##1~--}%
 }
 
-% WTF! Очень спорный момент! Расхождения между СТВУЗ и правилами кафедры
+\newlength{\oldParindent}
+
 \newenvironment{formulaDescription}
-{
-  \renewcommand{\item}[1][1]{
-    \setlength{\parindent}{\oldParindent}\whereItem[##1]
-  }
-  \setlength{\oldParindent}{\parindent}
-} 
-{
-  \renewcommand{\item}[1][1]{\old@item[##1]} 
-  \setlength{\parindent}{\oldParindent}
-}
+{\renewcommand{\item}[1][1]{\whereItem[##1]} \setlength{\oldParindent}{\parindent}}
+{\renewcommand{\item}[1][1]{\old@item[##1]} \setlength{\parindent}{\oldParindent}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Список сокращений
 
 \newenvironment{abbrDescription}
 { 
   \renewcommand{\item}[1][1]{
     \old@item[##1]--
   }
-  \begin{description}
+  \begin{enumerate}
 } 
 {
-  \end{description}
+  \end{enumerate}
   \renewcommand{\item}[1][1]{\old@item[##1]} 
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Перечисления предложениями
 \newenvironment{longEnumerate}
 { 
   \liststyleNumberingArabicSpace
@@ -439,6 +504,10 @@ mu$}\hfill%
 \SetEnumerateShortLabel{b}{\asbuk*}
 \SetEnumerateShortLabel{B}{\Asbuk*}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Нумерация
+
 % Нумерация таблиц и рисунков в пределах раздела
 \@addtoreset{figure}{section}
 \@addtoreset{table}{section}
@@ -457,13 +526,22 @@ mu$}\hfill%
 \newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
             {\hbox{\mathsurround=0pt #1}}{}}
 
+% Пропуск строки до и после формул
+\let\old@equation\equation
+\let\endold@equation\endequation
 
-% Пропуск строки перед рисунками
-\newenvironment{stdfigure}{\@float{figure}[h!] \skipline \centering }
-{\end@float}
+\renewenvironment{equation}{%
+  \skipbeforeformula \old@equation
+}{%
+  \endold@equation \skipafterformula
+}
 
-\let\old@caption\caption
-\renewcommand{\caption}[1]{\old@caption{#1}\vspace{7pt}}
+\renewenvironment{equation*}{%
+  \skipbeforeformula \old@equation
+}{%
+  \nonumber\endold@equation \skipafterformula
+}
+
 
 \renewcommand{\@biblabel}[1]{#1} % Номер в библиографии без []
 \renewenvironment{thebibliography}[1] % Отступы в библиографии
@@ -488,6 +566,14 @@ mu$}\hfill%
   \@ifundefined{selectfont}{\def\UrlFont{\rtm}}{\def\UrlFont{}}
 }
 \urlstyle{url}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Таблицы
+\floatsetup[table]{style=plain,capposition=top,captionskip=0pt}
+
+% столбец C - центрированный с переносом слов
+\newcolumntype{C}[1]{>{\centering\arraybackslash} m{#1}}
 
 % стили переноса таблиц 
 
@@ -539,50 +625,34 @@ mu$}\hfill%
 \caption{#2} \\ 
   \hline #3 \\ \hline \tnumberhead{#1} \\ \headerline
 \endfirsthead
-\multicolumn{#1}{l}
+\multicolumn{#1}{l}%
            {\captionsize{Закінчення таблиці \thetable}} \\
   \hline \tnumberhead{#1} \\ \headerline
 \endlasthead
-\multicolumn{#1}{l}
+\multicolumn{#1}{l}%
            {\captionsize{Продовження таблиці \thetable}} \\
   \hline \tnumberhead{#1} \\ \headerline
 \endhead
 }
 
-
-% Команда для пропуска строки
-\newcommand{\skipline}{\vspace{28pt}} 
-
-% %% WTF? Is it used somewhere
-% \newcommand{\addvpadding}{\setlength{\extrarowheight}{0cm}}
-% \newcommand{\delvpadding}{\setlength{\extrarowheight}{2cm}}
-
 % Унифицированная вставка таблиц (безобразно но единообразно)
-\newenvironment{shorttable}[4]
-{
-\begin{table}[H]
-\caption{#3}
-\begin{tabular}{#2}
-\hline #4 \\ \headerline
-}
-{
-\end{tabular}
-\end{table}
-% 6.3.3.5 Пропуск строки после таблиц
-\skipline
+\newenvironment{stdtableshort}[4]{%
+  \table[h!]%
+  \caption{#3}%
+  \tabularx{\textwidth}{#2}%
+  \hline #4 \\ \headerline
+}{ \endtabularx%
+  \endtable%
 }
 
-\let\old@longtable\longtable
-\let\endold@longtable\endlongtable
-\renewenvironment{longtable}[4]
-{
-\begin{old@longtable}{#2}
-\longthead{#1}{#3}{#4}
-}
-{
-\end{old@longtable}
+\newenvironment{stdtablelong}[4]{%
+  \skipline
+  \begin{longtable}{#2}
+    \longthead{#1}{#3}{#4}
+}{%
+  \end{longtable}
 % 6.3.3.5 Пропуск строки после таблиц
-\skipline
+  \skipline
 }
 
 \newenvironment{xlongtable}[4]
@@ -596,7 +666,8 @@ mu$}\hfill%
 \skipline
 }
 
-\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Окончание определения стилевых команд
 
 % двойные кавычки типа ёлочки и лапки
@@ -620,23 +691,7 @@ mu$}\hfill%
 \newcounter{tocpage}
 \setcounter{tocpage}{2} %the default
 
-\uchyph=1
-
-\mathchardef\mhyphen="2D
-
-\floatsetup[table]{style=plain,capposition=top}
-
 % Умолчания
 \liststyleNumberingArabicLitera
 
-% FIXME Почему-то приходится записывать их как константы английского языка
-\def\captionsenglish{
-
-% Языковые константы
-\def\tablename{Таблиця}
-\def\figurename{Рисунок}
-\def\refname{Список джерел інформації}
-\def\usedsources{Перелік джерел, на які надані посилання у тексті}
-\def\unusedsources{Перелік джерел, на які нема посилань у  тексті}
-
-}
+\makeatother
