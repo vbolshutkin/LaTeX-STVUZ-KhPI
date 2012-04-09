@@ -12,7 +12,7 @@
 \usepackage[ukrainian,russian,english]{babel} % украинские, русские и английские
 % переносы
 
-% \usepackage{pscyr} % TODO check: кажется, поддержка Times New Roman 
+\usepackage{pscyr} % TODO check: кажется, поддержка Times New Roman 
 \renewcommand{\rmdefault}{ftm}
 
 \let\footnotesize\relax
