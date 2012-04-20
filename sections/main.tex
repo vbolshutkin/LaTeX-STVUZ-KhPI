@@ -39,6 +39,7 @@
 \begin{enumerate}
   \item section, subsection, subsubsection;
   \item footnote;
+  \item enquote, enquote*;
   \item item (тільки всередені оточень itemize, enumerate, longEnumerate,
   description, formulaDescription, abbrDescription);
   \item cite;
@@ -76,19 +77,64 @@
 \subsection{Відомі проблеми}
 
 \begin{longEnumerate}
-\item Стилі таблиць коректно працюють лише для широких таблиць (на всю область сторінки). Інакше, заголовок таблиці всеодно відображається ліворуч, а не над першою колонкою таблиці.
-\item В Footnote не працює одинарний інтервал (залишається півтора) 
+\item Стилі таблиць коректно працюють лише для широких таблиць (на всю область
+сторінки). Інакше, заголовок таблиці всеодно відображається ліворуч, а не над
+першою колонкою таблиці.
+\item В Footnote не працює одинарний інтервал (залишається півтора). 
+\item В заголовках таблиць та рисунків тире не розкриваються.
 \end{longEnumerate}
 
 \section{Нотатки по практичному застосуванню шаблона}
 \subsection{Оформлення списку джерел інформації}
 
 Оформлення списку джерел інформації проводиться згідно ДСТУ ГОСТ 7.1:2006
-«Бібліографічний запис, бібліографічний опис. Загальні вимоги та правила
-складання»~\cite{DSTU_GOST_7.1_2006}. Приклади оформлення джерел наведені у
+\enquote{Бібліографічний запис, бібліографічний опис. Загальні вимоги та правила
+складання}~\cite{DSTU_GOST_7.1_2006}. Приклади оформлення джерел наведені у
 даному документі.
 
 \subsection{Використання команд і оточень}
+\subsubsection{Текст}
+
+Набір тексту здійснюється без використання додаткових стилів. Між параграфами
+у вихідному коді слід пропускати вільний рядок.
+
+Для того, щоб взяти текст у лапки, підключено пакет \enquote{csquotes}.
+Стандартний спосіб його використання~-- команди \enquote{enquote} та
+\enquote*{enquote*}. Допускається вкладене використання команди
+\enquote{enquote}. Додаткову інформацію про команди пакету \enquote{csquotes}
+слід дивитися у документації до нього.
+
+Приклад використання:
+\begin{framed}\small
+\begin{lstlisting}
+Lorem ipsum dolor \enquote{sit amet}, consectetur 
+\enquote*{adipiscing} elit: \enquote{Phasellus 
+adipiscing commodo \enquote{felis vitae} volutpat}. 
+Curabitur rutrum quam non dui varius convallis
+\end{lstlisting}
+\end{framed}
+
+Lorem ipsum dolor \enquote{sit amet}, consectetur \enquote*{adipiscing} elit:
+\enquote{Phasellus adipiscing commodo \enquote{felis vitae} volutpat}. Curabitur
+rutrum quam non dui varius convallis
+
+Вставка тире та дефісів
+
+Вставка тире та дефісів повинна здійснюватись командами
+\enquote{-{}-}, \enquote{-{}-{}-}.
+
+Приклад їх роботи можна спостерігати на прикладі:
+
+\begin{framed}\small
+\begin{lstlisting}
+Lorem ipsum dolor sit amet---consectetur adipiscing
+elit, phasellus adipiscing commodo~-- felis vitae volutpat.
+\end{lstlisting}
+\end{framed}
+
+Lorem ipsum dolor sit amet---consectetur adipiscing elit, phasellus adipiscing
+commodo~-- felis vitae volutpat.
+
 \subsubsection{Списки}
 
 Маркірований список
@@ -256,12 +302,17 @@ lacinia nisi vestibulum eleifend:
 
 \subsubsection{Вставка формул}
 
+Короткі формули без номерів можна вставляти безпосередньо до тексту за допомогою
+математичного оточення \enquote{\$ something \$}. Наприклад, \enquote{{\$}e=m
+{\textbackslash}cdot c{\textasciicircum}2{\$}}, буде відображено як $e=m \cdot
+c^2$.
+
 Для вставки формули з номером:
 
 \begin{framed}\small
 \begin{lstlisting}
 \begin{equation}
-\text{ Це } \Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
+\Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
 \end{equation}
 \end{lstlisting}
 \end{framed}
@@ -269,10 +320,10 @@ lacinia nisi vestibulum eleifend:
 Результат:
 
 \begin{equation}
-\text{ Це } \Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
+\Delta =\sum_{i=1}^N w_i (x_i - \bar{x})^2 .
 \end{equation}
 
-Для вставки формули без номеру
+Для вставки формули без номеру:
 
 \begin{framed}\small
 \begin{lstlisting}
@@ -287,6 +338,21 @@ g = \frac{1}{2} \sqrt{2\pi}
 \begin{equation*}
 g = \frac{1}{2} \sqrt{2\pi}
 \end{equation*}
+
+Для використання кирилиці в формулах необхідно заключати її в команду
+\enquote{text}:
+
+\begin{framed}\small
+\begin{lstlisting}
+\begin{equation}
+\text{ Для~} a \in A: p(a) \geq 1
+\end{equation}
+\end{lstlisting}
+\end{framed}
+
+\begin{equation}
+\text{Для~} a \in A: p(a) \geq 1
+\end{equation}
 
 Змінні що використані у формулі та не були описані до того у тексті повинні бути
 описані відразу після формули. 

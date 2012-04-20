@@ -6,4 +6,5 @@
 *.blg
 *.synctex.gz
 .project
+.texlipse
 tmp

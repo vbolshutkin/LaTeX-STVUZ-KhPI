@@ -2,6 +2,7 @@
 \ProvidesClass{stvuz_khpi}[2010/03/01]
 \LoadClass[a4paper,14pt,hyphens]{extarticle}[1996/10/08]
 
+\usepackage{amssymb} %% математические символы % надо подключать вначале
 \usepackage{xltxtra}
 \usepackage{polyglossia}  %% подключает пакет многоязыкой вёрстки
 \setmainfont{Times New Roman}  %% задаёт основной шрифт документа
@@ -9,6 +10,7 @@
 \setmonofont{DejaVu Sans Mono}  %% задаёт моноширинный шрифт
 \defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}  %% устанавливает поведение шрифтов по умолчанию
 \setdefaultlanguage{ukrainian}
+%\setkeys{russian}{babelshorthands=true} %% FIXME не работает
 %\setdefaultlanguage[spelling=modern]{russian}  %% устанавливает язык по умолчанию
 \setotherlanguage{english}
 
@@ -36,7 +38,6 @@
    \def\authorname{Іменний покажчик}% babel has "Їменний покажчик"
    \def\figurename{Рисунок}%
    \def\tablename{Таблиця}%
-   %\def\thepart{}%
    \def\partname{Частина}%
    \def\pagename{с.}%
    \def\seename{див.}%
@@ -63,12 +64,12 @@
 \def\Asbuk#1{\expandafter\ukrainian@Alph\csname c@#1\endcsname}
 \def\asbuk#1{\expandafter\ukrainian@alph\csname c@#1\endcsname}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Пакеты
 \usepackage{footmisc}
 \usepackage[unicode,breaklinks]{hyperref}
-%\usepackage{mathtext} % кириллические буквы в формулах
+%\usepackage[warn]{mathtext} % кириллические буквы в формулах % несовместимо с
+% xelatex
 \usepackage{fontspec}
 \usepackage{xunicode}
 %\usepackage{cmap}
@@ -80,6 +81,9 @@
 
 \usepackage{forloop}
 \usepackage{expl3}
+
+\usepackage{ifthen}
+\usepackage{intcalc} % to calculate mod for declination
 
 %\usepackage[noenc]{tipa}
 %\usepackage{tipx}
@@ -93,7 +97,7 @@
 \usepackage{eurosym}
 \usepackage{amsmath}
 \usepackage{wasysym}
-%\usepackage{amssymb}
+
 \usepackage{amsfonts}
 %\usepackage{textcomp} % Conflicts
 \usepackage{tabularx}
@@ -104,7 +108,6 @@
 \usepackage{eskdcap} % надписи по ЕСКД
 % СТВУЗ ХПІ 3.01-2010 пункт 5.3
 \usepackage{eskdtotal} % счетчики для рефератов по ЕСКД 
-
 
 \usepackage{color} % выделение цветом (в основном, для отладки)
 \usepackage{array}
@@ -124,6 +127,9 @@
 % СТВУЗ ХПІ 3.01-2010 пункт 6.3.4.3
 \usepackage{flafter} % Размещать рисунки (float) после первого упоминания
 
+\usepackage[style=russian]{csquotes} %% Кавычки (\enquote{something}) ёлочки и
+% лапки
+
 \bibliographystyle{stvuz_utf8gost780u}  % стилевой файл для оформления
 % библиографии по ГОСТ 7.1-84 и ГОСТ 7.80-00 . FIXME В СТВУЗ написано
 % использовать ДСТУ ГОСТ 7.1. 
@@ -132,6 +138,7 @@
 \def\BibEmph#1{\textrm{#1}} % убрать курсив
 
 \usepackage{caption}
+\DeclareCaptionFormat{plain}{#1~–~#3} % -- не работал, заменили юникодным
 
 %\usepackage{printlen} % отладочные команды
 %\newcommand*{\Lenv}[1]{\texttt {#1}} %
@@ -381,8 +388,8 @@ mu$}\hfill%
 % Рисунки
 
 %% Пропуск строки перед рисунками
-\newenvironment{stdfigure}{\@float{figure}[h!] \skipline \centering }
-{\end@float}
+\newenvironment{stdfigure}{\@float{figure}[h!] 
+\stepcounter{ESKD@figure} \skipline \centering } {\end@float}
 
 % СТВУЗ ХПІ 3.01-2010 пункт 6.3.4.6
 % команда для продолжения рисунков  
@@ -638,6 +645,7 @@ mu$}\hfill%
 % Унифицированная вставка таблиц (безобразно но единообразно)
 \newenvironment{stdtableshort}[4]{%
   \table[h!]%
+  \stepcounter{ESKD@table} % костыль для подсчета таблиц
   \caption{#3}%
   \tabularx{\textwidth}{#2}%
   \hline #4 \\ \headerline
@@ -647,6 +655,7 @@ mu$}\hfill%
 
 \newenvironment{stdtablelong}[4]{%
   \skipline
+  \stepcounter{ESKD@table} % костыль для подсчета таблиц
   \begin{longtable}{#2}
     \longthead{#1}{#3}{#4}
 }{%
@@ -666,26 +675,29 @@ mu$}\hfill%
 \skipline
 }
 
+\newcommand{\declinate}[4]
+{
+\ifthenelse{\equal{#1}{?}}{?}{
+#1~\ifthenelse{\equal{#1}{11}}{#4}
+{\ifthenelse{\equal{#1}{12}}{#4}
+{\ifthenelse{\equal{#1}{13}}{#4}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{1}}{#2}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{2}}{#3}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{3}}{#3}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{4}}{#3}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{5}}{#4}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{6}}{#4}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{7}}{#4}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{8}}{#4}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{9}}{#4}
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{0}}{#4}
+{}}}}}}}}}}}}}
+}
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Окончание определения стилевых команд
-
-% двойные кавычки типа ёлочки и лапки
-% может лапки такие “бла”? ,,бла''
-\newcounter{edqopen}
-\setcounter{edqopen}{1}
-\newcounter{ldqopen}
-\setcounter{ldqopen}{1}
-\newcounter{innerquote}
-\setcounter{innerquote}{0}
-\newcommand{\oedq}{<<\setcounter{edqopen}{0}\setcounter{innerquote}{1}}
-\newcommand{\cedq}{>>\setcounter{edqopen}{1}\setcounter{innerquote}{0}}
-\newcommand{\oldq}{“\setcounter{ldqopen}{0}}
-\newcommand{\cldq}{”\setcounter{ldqopen}{1}}
-\newcommand{\edq}{\ifthenelse{\equal{\arabic{edqopen}}{1}}{\oedq}{\cedq}}
-\newcommand{\ldq}{\ifthenelse{\equal{\arabic{ldqopen}}{1}}{\oldq}{\cldq}}
-\newcommand{\quot}[1][0]{\ifthenelse{{\equal{\arabic{ldqopen}}{0}}\or
-    {\equal{#1}{1}\and\equal{\arabic{innerquote}}{1}}}{\ldq}{\edq}}
 
 %page number for toc
 \newcounter{tocpage}
