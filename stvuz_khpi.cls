@@ -389,7 +389,7 @@ mu$}\hfill%
 
 %% Пропуск строки перед рисунками
 \newenvironment{stdfigure}{\@float{figure}[h!] 
-\stepcounter{ESKD@figure} \skipline \centering } {\end@float}
+\skipline \centering } {\end@float}
 
 % СТВУЗ ХПІ 3.01-2010 пункт 6.3.4.6
 % команда для продолжения рисунков  
@@ -676,23 +676,23 @@ mu$}\hfill%
 }
 
 \newcommand{\declinate}[4]
-{
-\ifthenelse{\equal{#1}{?}}{?}{
-#1~\ifthenelse{\equal{#1}{11}}{#4}
-{\ifthenelse{\equal{#1}{12}}{#4}
-{\ifthenelse{\equal{#1}{13}}{#4}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{1}}{#2}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{2}}{#3}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{3}}{#3}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{4}}{#3}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{5}}{#4}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{6}}{#4}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{7}}{#4}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{8}}{#4}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{9}}{#4}
-{\ifthenelse{\equal{\intcalcMod{#1}{10}}{0}}{#4}
-{}}}}}}}}}}}}}
-}
+{%
+\ifthenelse{\equal{#1}{?}}{?}{%
+#1~\ifthenelse{\equal{#1}{11}}{#4}%
+{\ifthenelse{\equal{#1}{12}}{#4}%
+{\ifthenelse{\equal{#1}{13}}{#4}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{1}}{#2}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{2}}{#3}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{3}}{#3}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{4}}{#3}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{5}}{#4}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{6}}{#4}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{7}}{#4}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{8}}{#4}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{9}}{#4}%
+{\ifthenelse{\equal{\intcalcMod{#1}{10}}{0}}{#4}%
+{}}}}}}}}}}}}}%
+}%
 }
 
 
