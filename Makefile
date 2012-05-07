@@ -1,5 +1,3 @@
-#!/usr/bin/make -f
-
 LATEX := xelatex
 MAINFILE := $(shell f=`echo *.pdf`; if [ -r "$$f" ]; then echo $${f%%.pdf}; else basename $(PWD); fi)
 SECTIONS := $(shell find sections -name '*.tex' )
@@ -31,8 +29,7 @@ dist: dist-gzip
 
 
 dist-gzip:: mainpdf clean
-	tardir=. && $(am__tar) | gzip -c > ../$(MAINFILE).tar.gz
-	echo ../$(MAINFILE).tar.gz created
+	tardir="$(shell basename $(PWD))" && cd .. && $(am__tar) | gzip -c > $(MAINFILE).tar.gz
 
 
 PHONY: all clean clean-bak clean-runtime mainpdf dist dist-gzip

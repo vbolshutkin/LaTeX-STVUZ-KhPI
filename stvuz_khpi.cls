@@ -67,7 +67,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Пакеты
 \usepackage{footmisc}
-\usepackage[unicode,breaklinks]{hyperref}
 %\usepackage[warn]{mathtext} % кириллические буквы в формулах % несовместимо с
 % xelatex
 \usepackage{fontspec}
@@ -566,14 +565,6 @@ mu$}\hfill%
 }
 
 
-% Стили оформления веб-ссылок
-%\let\old@url\url FIXME bug: with \uline links cannot be hyphenated
-%\renewcommand{\url}[1]{\uline{\old@url{#1}}}
-\def\url@urlstyle{%
-  \@ifundefined{selectfont}{\def\UrlFont{\rtm}}{\def\UrlFont{}}
-}
-\urlstyle{url}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Таблицы
@@ -705,5 +696,16 @@ mu$}\hfill%
 
 % Умолчания
 \liststyleNumberingArabicLitera
+
+
+\usepackage[unicode,breaklinks]{hyperref}
+
+% Стили оформления веб-ссылок
+%\let\old@url\url FIXME bug: with \uline links cannot be hyphenated
+%\renewcommand{\url}[1]{\uline{\old@url{#1}}}
+\def\url@urlstyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\rtm}}{\def\UrlFont{}}
+}
+\urlstyle{url}
 
 \makeatother
